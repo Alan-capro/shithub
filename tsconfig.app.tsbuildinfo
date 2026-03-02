@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/shithublanding.tsx","./src/data/repos.ts","./src/lib/contributions.ts","./src/lib/errors.ts","./src/lib/pullrequest.ts","./src/types/index.ts"],"version":"5.9.3"}
