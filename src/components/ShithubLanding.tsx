@@ -6,11 +6,13 @@ import {
   maybeAskPhilosophicalQuestion,
   randomShithubStatusCode,
 } from "../lib/pullRequest";
+import { LoginForm } from "./LoginForm";
 
 export function ShithubLanding() {
   const contributions = useMemo(() => generateBrownContributionGraph(), []);
   const [mergePos, setMergePos] = useState({ x: 0, y: 0 });
   const [mergeEnabled, setMergeEnabled] = useState(false);
+   const [showLogin, setShowLogin] = useState(false);
 
   const handleMergeMouseEnter = (event: MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -58,16 +60,16 @@ export function ShithubLanding() {
             />
             <button
               type="button"
-              onClick={() => window.alert("Database is currently on fire")}
+              onClick={() => setShowLogin(true)}
               className="rounded-md bg-sludge-600 px-4 py-2 text-sm font-semibold text-[#f8ece0] hover:bg-sludge-500"
             >
-              Sign up
+              Sign in
             </button>
           </div>
         </div>
       </header>
 
-      <section className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-16 text-center">
+      <section className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-16 text-center">
         <div className="mb-4 rounded-full border border-sludge-700 bg-sludge-900 px-4 py-1 text-xs uppercase tracking-widest text-[#b39d8c]">
           Octo-Poop Labs
         </div>
@@ -77,10 +79,20 @@ export function ShithubLanding() {
         </p>
         <button
           type="button"
+          onClick={() => setShowLogin(true)}
           className="mt-8 rounded-lg bg-sludge-500 px-6 py-3 text-base font-bold text-[#f8ece0] shadow-lg shadow-[#00000066] transition hover:translate-y-0.5 hover:bg-[#9f6547]"
         >
           Start Shitting
         </button>
+
+        {showLogin && (
+          <div className="pointer-events-auto fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+            <LoginForm
+              onSuccess={() => setShowLogin(false)}
+              onClose={() => setShowLogin(false)}
+            />
+          </div>
+        )}
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-6 pb-12">
